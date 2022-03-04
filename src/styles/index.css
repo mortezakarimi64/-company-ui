@@ -1,0 +1,40 @@
+@font-face {
+  font-family: "Yekan";
+  src: url("../assets/fonts/IRANYekanMobileMedium.ttf") format("truetype"); /* Safari, Android, iOS */
+}
+
+@font-face {
+  font-family: "YekanBold";
+  src: url("../assets/fonts/IRANYekanMobileBold.ttf") format("truetype"); /* Safari, Android, iOS */
+}
+
+@font-face {
+  font-family: "FontAwesome";
+  src: url("../assets/fonts/fa-solid-900.ttf") format("truetype"); /* Safari, Android, iOS */
+}
+
+body {
+  margin: 0;
+  font-family: "Yekan" !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #f0f2f5;
+}
+
+code {
+  font-family: "Yekan" !important;
+}
+
+/* ---------------------- */
+
+.header .logo {
+  float: right;
+  margin: 16px 0 16px 24px;
+  width: 120px;
+  height: 31px;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.site-layout-background {
+  background: #fff;
+}

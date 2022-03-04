@@ -1,0 +1,16 @@
+{
+  "apiUrl": "http://localhost:3030/api",
+  "fileBasicUrl": "http://localhost:3030/static",
+  "fileSize": {
+    "maxFileSize": 10,
+    "extensions": "jpg|jpeg|png|bmp|pdf|doc|docx|xls|xlsx|zip|rar|mp3|mp4",
+    "destinationFolder": "data",
+    "sizeType": "mb"
+  },
+  "profileImageFileSize": {
+    "maxFileSize": 150,
+    "extensions": "jpg|jpeg|png",
+    "destinationFolder": "member-profiles",
+    "sizeType": "kb"
+  }
+}

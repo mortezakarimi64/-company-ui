@@ -1,0 +1,50 @@
+{
+  "short_name": "سینترا",
+  "name": "مدیریت یکپارچه سینترا",
+  "icons": [
+    {
+      "src": "sintra.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "sintra120.png",
+      "type": "image/png",
+      "sizes": "120x120"
+    },
+    {
+      "src": "sintra144.png",
+      "type": "image/png",
+      "sizes": "144x144"
+    },
+    {
+      "src": "sintra152.png",
+      "type": "image/png",
+      "sizes": "152x152"
+    },
+    {
+      "src": "sintra167.png",
+      "type": "image/png",
+      "sizes": "167x167"
+    },
+    {
+      "src": "sintra180.png",
+      "type": "image/png",
+      "sizes": "180x180"
+    },
+    {
+      "src": "sintra192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "sintra512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
