@@ -39,19 +39,21 @@ const InputItem = ({
   horizontal,
   labelCol,
   formConfig,
+  disabled,
   ...rest
 }) => {
   const { errors } = formConfig;
 
   const handleChange = (data) => handleTextChange(data, formConfig);
+  const _disabled = disabled !== undefined ? disabled : false;
 
   let control = null;
   if (!password && multiline) {
-    control = <TextArea {...rest} onChange={handleChange} />;
+    control = <TextArea {...rest} onChange={handleChange} disabled={_disabled} />;
   } else if (!multiline && password) {
-    control = <Password {...rest} onChange={handleChange} />;
+    control = <Password {...rest} onChange={handleChange} disabled={_disabled} />;
   } else {
-    control = <Input {...rest} onChange={handleChange} />;
+    control = <Input {...rest} onChange={handleChange} disabled={_disabled} />;
   }
 
   return (

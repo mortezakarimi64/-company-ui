@@ -1,6 +1,6 @@
 {
-  "apiUrl": "http://localhost:3030/api",
-  "fileBasicUrl": "http://localhost:3030/static",
+  "apiUrl": "http://localhost:3031/api",
+  "fileBasicUrl": "http://localhost:3031/static",
   "fileSize": {
     "maxFileSize": 10,
     "extensions": "jpg|jpeg|png|bmp|pdf|doc|docx|xls|xlsx|zip|rar|mp3|mp4",

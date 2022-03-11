@@ -4,7 +4,7 @@ import { DatePicker as DatePickerJalali } from "antd-jalali";
 import fa_IR from "antd/lib/locale/fa_IR";
 import utils from "./../../tools/utils";
 
-const JalaliDatePicker = ({ fieldName, formConfig }) => {
+const JalaliDatePicker = ({ fieldName, formConfig, disabled }) => {
   const dateValue = formConfig.record[fieldName];
 
   return (
@@ -15,6 +15,7 @@ const JalaliDatePicker = ({ fieldName, formConfig }) => {
           dateValue && dateValue.length > 0 ? utils.jalaliDate(dateValue) : null
         }
         style={{ width: "100%" }}
+        disabled={disabled}
       />
     </ConfigProvider>
   );
@@ -45,8 +46,10 @@ const DateItem = ({
   horizontal,
   labelCol,
   formConfig,
+  disabled,
 }) => {
   const { errors } = formConfig;
+  const _disabled = disabled !== undefined ? disabled : false;
 
   return (
     <Form.Item
@@ -67,7 +70,7 @@ const DateItem = ({
           : "success"
       }
     >
-      <JalaliDatePicker fieldName={fieldName} formConfig={formConfig} />
+      <JalaliDatePicker fieldName={fieldName} formConfig={formConfig} disabled={_disabled} />
     </Form.Item>
   );
 };

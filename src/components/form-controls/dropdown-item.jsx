@@ -17,6 +17,7 @@ const DropdownItem = ({
   dataSource,
   keyColumn,
   valueColumn,
+  colorColumn,
   onChange,
   onSearch,
   required,
@@ -24,8 +25,14 @@ const DropdownItem = ({
   vertical,
   labelCol,
   formConfig,
+  mode,
+  showFirstOption,
+  disabled,
   ...rest
 }) => {
+  const _disabled = disabled !== undefined ? disabled : false;
+  const _mode = mode !== undefined ? mode : null;
+
   return (
     <Form.Item
       wrapperCol={{ span: vertical && vertical !== false ? 24 : 24 - labelCol }}
@@ -55,13 +62,17 @@ const DropdownItem = ({
         filterOption={(input, option) =>
           option?.children?.toLowerCase().indexOf(input.toLowerCase()) >= 0
         }
+        mode={_mode}
+        disabled={_disabled}
       >
-        <Option key={`${keyColumn}_0`} value={0}>
-          {Words.select_please}
-        </Option>
+        {showFirstOption !== false && (
+          <Option key={`${keyColumn}_0`} value={0}>
+            {Words.select_please}
+          </Option>
+        )}
         {dataSource &&
           dataSource.map((item) => (
-            <Option
+            <Option style={colorColumn !== undefined ? { color: item[colorColumn] } : null}
               key={`${keyColumn}_${item[keyColumn]}`}
               value={item[keyColumn]}
             >

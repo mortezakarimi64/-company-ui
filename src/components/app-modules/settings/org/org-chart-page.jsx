@@ -38,7 +38,6 @@ const OrgChartPage = () => {
     setProgress(true);
     const data = await service.getAllData();
 
-    console.log(data);
     setDepartments(data);
     setProgress(false);
   });

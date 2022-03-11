@@ -228,6 +228,20 @@ class Words extends Component {
   static extra_work_command_sources = "منابع دستور اضافه کار";
   static tasks = "مدیریت وظایف";
   static tags = "برچسب ها";
+  static myTasks = "وظایف من";
+  static reminder_date = "تاریخ یادآوری";
+  static reminder_time = "زمان یادآوری";
+  static seen_date = "تاریخ مشاهده";
+  static seen_time = "زمان مشاهده";
+  static done_date = "تاریخ انجام";
+  static done_time = "زمان انجام";
+  static intervalTasks = "وظایف تکرار شونده";
+  static intervalTitle = "وظیفه تکرار شونده";
+  static responseMember = "مسئول انجام";
+  static supervisors = "ناظران";
+  static letters = "نامه ها";
+  static addAnotherFile = "افزودن فایل";
+  static file = "فایل";
 
   static mission_new_reports = "گزارش های جدید ماموریت";
   static mission_reply_status = "نتیجه بررسی گزارش";
@@ -388,6 +402,7 @@ class Words extends Component {
     no_note_submitted_yet: "یادداشتی ثبت نشده است",
     your_note_submitted: "یادداشت شما ثبت شد",
     note_deleted: "یادداشت مورد نظر حذف شد",
+    reminder_select: "لطفا تاریخ و زمان یادآوری را انتخاب کنید",
   };
 
   static questions = {

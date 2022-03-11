@@ -9,6 +9,7 @@ import {
 } from "@ant-design/icons";
 import Words from "../resources/words";
 import accessesService from "./../services/app/accesses-service";
+import fileService from "./../services/file-service";
 import utils from "./utils";
 import {
   usePageContext,
@@ -257,6 +258,105 @@ export const handleDropdownSelectedItemChange = (
 
   record[keyColumn] = value || 0;
   setRecord(record);
+};
+
+export const handlePlusFileUpload = (maxFile, formConfig) => {
+  const { counter, setCounter, fileLists, setFileLists } = formConfig;
+
+  if (counter < maxFile) {
+    let _counter = counter + 1, _fileLists = [...fileLists];
+    const listID = "List" + _counter.toString(); //Warning: This Line Doesn't Change
+    _fileLists.push({
+      ListID: listID,
+      fileList: [],
+      file: undefined,
+    });
+
+    setCounter(_counter);
+    setFileLists(_fileLists);
+  }
+};
+
+export const handleMinusFileUpload = (listID, formConfig) => {
+  const { counter, setCounter, fileLists, setFileLists, record, setRecord } = formConfig;
+
+  if (counter >= 0) {
+    let _counter = counter - 1;
+    const _fileLists = fileLists.filter(obj => obj.ListID !== listID);
+    _fileLists.forEach((element, index) => {
+      const listID = "List" + (index+1).toString(); //Warning: This Line Doesn't Change
+      element.ListID = listID;
+    });
+    const _record = record.Files.filter(obj => obj.ListID !== listID);
+    _record.forEach((element, index) => {
+      const listID = "List" + (index+1).toString(); //Warning: This Line Doesn't Change
+      element.ListID = listID;
+    });
+    record.Files = _record;
+
+    setCounter(_counter);
+    setFileLists(_fileLists);
+    setRecord(record);
+  }
+};
+
+export const onUploadProgress = (progressEvent, object, formConfig) => {
+  const progress = Math.round((progressEvent.loaded / progressEvent.total) * 100);
+
+  const { fileLists, setFileLists } = formConfig;
+  fileLists.find(f => f.ListID === object.ListID).uploadProgress = progress;
+
+  setFileLists(fileLists);
+};
+
+export const handleUpload = async (object, deleteLastFile, fileConfig, formConfig, isEdit, uploadFolder) => {
+  const { extensions, maxFileSize } = fileConfig;
+  const { fileLists, setFileLists, record, setRecord } = formConfig;
+
+  let result = null;
+
+  if (object.file) {
+    const upFileName = object.file.name;
+
+    const fd = new FormData();
+    fd.append("dataFile", object.file, upFileName);
+
+    const uploadConditions = { category: uploadFolder, extensions, maxFileSize, };
+    const _record = record.Files.find(obj => obj.ListID === object.ListID);
+
+    if (record.Files.length > 0 && record.Files.some(obj => obj.ListID === object.ListID)) {
+      if (deleteLastFile === true && _record.FileName.length > 0) {
+        uploadConditions.deleteFileName = _record.FileName;
+      }
+    }
+
+    const list = fileLists.find(f => f.ListID === object.ListID);
+    list.uploading = true;
+    setFileLists(fileLists);
+
+    result = await fileService.uploadFile(fd, uploadConditions, (e) =>
+      onUploadProgress(e, object, formConfig)
+    );
+
+    if (isEdit && _record) {
+      _record.FileName = result.fileName;
+      _record.FileSize = parseInt(object.file.size / 1024);
+    }
+    else {
+      record.Files.push({
+        FileID: -1,
+        FileName: result.fileName,
+        ListID: object.ListID,
+        FileSize: parseInt(object.file.size / 1024),
+      });
+    }
+    list.uploading = false;
+
+    setFileLists(fileLists);
+    setRecord({ ...record });
+  }
+
+  return result;
 };
 
 //------------------------------------------------------------------------------

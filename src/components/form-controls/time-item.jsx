@@ -5,7 +5,7 @@ import fa_IR from "antd/lib/locale/fa_IR";
 import moment from "moment";
 import utils from "../../tools/utils";
 
-const ProTimePicker = ({ fieldName, formConfig }) => {
+const ProTimePicker = ({ fieldName, formConfig, disabled }) => {
   const timeValue = formConfig.record[fieldName];
 
   return (
@@ -19,6 +19,7 @@ const ProTimePicker = ({ fieldName, formConfig }) => {
         }
         onChange={(time) => onTimeChange(fieldName, time, formConfig)}
         style={{ width: "100%" }}
+        disabled={disabled}
       />
     </ConfigProvider>
   );
@@ -48,8 +49,10 @@ const TimeItem = ({
   horizontal,
   labelCol,
   formConfig,
+  disabled,
 }) => {
   const { errors } = formConfig;
+  const _disabled = disabled !== undefined ? disabled : false;
 
   return (
     <Form.Item
@@ -70,7 +73,7 @@ const TimeItem = ({
           : "success"
       }
     >
-      <ProTimePicker fieldName={fieldName} formConfig={formConfig} />
+      <ProTimePicker fieldName={fieldName} formConfig={formConfig} disabled={_disabled} />
     </Form.Item>
   );
 };

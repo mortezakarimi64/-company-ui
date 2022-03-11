@@ -425,6 +425,67 @@ export function checkNationalCode(nationalCode) {
   }
 }
 
+export function getDataFromJsonWithDash (json, itemName) {
+  let res = '';
+
+  if (json !== null) { JSON.parse(json).forEach(obj => res += obj[itemName] + ' - '); }
+  const result = res.length > 0 ? res.substring(0, res.length-3) : '';
+
+  return result;
+};
+
+export function getDataFromJsonAsArray (json, itemName) {
+  let res = [];
+
+  if (json !== null) { JSON.parse(json).forEach(obj => res.push(obj[itemName])); }
+
+  return res;
+};
+
+export function getDataFromJsonAsObject (json, items) {
+  let res = [];
+
+  if (json !== null) { 
+    JSON.parse(json).forEach(obj => {
+      const object = {};
+      for (const key of items) { object[key] = obj[key]; }
+      res.push(object);
+    }); 
+  }
+
+  return res;
+};
+
+export function convertArrayToObject (array, json, isEdit, itemName1, itemName2) {
+  let res = [];
+
+  array.forEach(element => { 
+    let _elm = undefined, object = {};
+    if (isEdit && json !== null) { 
+      _elm = JSON.parse(json).find(obj => obj[itemName2] === element); 
+    }
+    object[itemName1] = isEdit ? (json ? (_elm !== undefined ? _elm[itemName1] : -1) : -1) : -1;
+    object[itemName2] = element;
+
+    res.push(object);
+  });
+
+  return res;
+};
+
+export function deleteAndShiftObject (object, key, itemName) {
+  delete object[key];
+     
+  let result = {}, count = 0;
+  for (const key in object) {
+    const name = itemName+(count+1).toString();
+    result[name] = object[key];
+    count++;
+  }
+
+  return result;
+};
+
 const methods = {
   addFirstZero,
   farsiNum,
@@ -461,6 +522,11 @@ const methods = {
   jalaliDate,
   generateRandomNumericPassword,
   checkNationalCode,
+  getDataFromJsonWithDash, 
+  getDataFromJsonAsArray,
+  getDataFromJsonAsObject,
+  convertArrayToObject,
+  deleteAndShiftObject,
 };
 
 export default methods;

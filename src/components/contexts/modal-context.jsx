@@ -43,6 +43,12 @@ const ModalContextProvider = ({ children }) => {
   const [vehicles, setVehicles] = useState([]);
   const [showModal, setShowModal] = useState([]);
   const [fileList, setFileList] = useState({});
+  const [intervals, setIntervals] = useState([]);
+  const [letters, setLetters] = useState([]);
+  const [tags, setTags] = useState([]);
+  const [supervisors, setSupervisors] = useState([]);
+  const [counter, setCounter] = useState(0);
+  const [fileLists, setFileLists] = useState([]);
 
   const contextValue = {
     progress,
@@ -121,6 +127,12 @@ const ModalContextProvider = ({ children }) => {
     setShowModal,
     fileList,
     setFileList,
+    intervals, setIntervals,
+    letters, setLetters,
+    tags, setTags,
+    supervisors, setSupervisors,
+    counter, setCounter,
+    fileLists, setFileLists,
   };
 
   return (
